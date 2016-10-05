@@ -1,21 +1,27 @@
-import java.util.Random;
+import java.util.*;
 
 public class bogo {
 	public static void main(String[] args) {
- 		ArrayList<Integer> bogoList = new ArrayList<Integer>(9);
- 		for(Integer i : bogoList) {
- 			bogoList.add(randInt(0,100));
- 		}
-
-		print(bogoArr);
+ 		ArrayList<Integer> bogoList = new ArrayList<Integer>();
+		bogoList = assignRandomList(bogoList,0,99);
+		print(bogoList);
 		boolean sorted = false;
+		int count = 0;
 		while(sorted == false) {
-			bogoArr = bogoSort(bogoArr);
-			sorted = checkSort(bogoArr);
-			print(bogoArr);
-			System.out.println("The array is sorted: " + sorted);			
-		}
+			count++;
+			bogoList = bogoSort(bogoList);
+			sorted = checkSort(bogoList);
+			print(bogoList);
+			System.out.println("The list is sorted: " + sorted);
+	 	}
+		System.out.println("The number of sorts bogo sort took was " + count);
+	}
 
+	public static ArrayList<Integer> assignRandomList(ArrayList<Integer> arr, int min, int max) {
+		for(int i = 0 ; i < 10 ; i++) {
+		 arr.add(i, randInt(min,max));
+	 }
+	 return arr;
 	}
 
 	public static int randInt(int min, int max) {
@@ -25,46 +31,23 @@ public class bogo {
 	}
 
 	public static void print(ArrayList<Integer> arr) {
-		for(int i : arr) {
+		for(Integer i : arr) {
 			System.out.print(i + " ");
 		}
 		System.out.println("");
 	}
 
 	public static boolean checkSort(ArrayList<Integer> a) {
-    	for (int i = 0; i < a.length() - 1; i++) {
-        	if (a[i] > a[i + 1]) {
-		    return false; // It is proven that the array is not sorted.
+    	for (int i = 0; i < a.size() - 1; i++) {
+        	if (a.get(i) > a.get(i + 1)) {
+		    		return false; // It is proven that the array is not sorted.
         	}
     	}
-
-	return true; // If this part has been reached, the array must be sorted.
+			return true; // If this part has been reached, the array must be sorted.
 	}
 
-	public static int[] bogoSort(int[] arr) {
-		
+	public static ArrayList<Integer> bogoSort(ArrayList<Integer> arr) {
+		 		Collections.shuffle(arr);
+				return arr;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
